@@ -1,0 +1,87 @@
+\documentclass{entcs} 
+%\usepackage{amsthm}
+%\usepackage{amssymb}
+%\usepackage{mathpartir}
+
+\usepackage{entcsmacro}
+%MY PACKAGES
+\usepackage[american]{babel}% Idiomas
+\usepackage{framed}
+\usepackage{indentfirst}
+\usepackage{listings}
+%\usepackage{natbib}
+\usepackage{mathtools}
+\usepackage{mhchem}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{trees,er,matrix,mindmap,backgrounds}
+\usetikzlibrary{shadings,intersections,calc}
+\usetikzlibrary{shapes,arrows,patterns,snakes}
+\usetikzlibrary{automata,shadows,fit,fadings,matrix,positioning}
+\usepackage{pgfplots}
+\usepackage{pgfkeys}
+\usepackage{mathrsfs}
+\usepackage{multirow}
+\usepgfplotslibrary{units}
+\pgfdeclarelayer{nodelayer}
+\pgfdeclarelayer{edgelayer}
+\pgfsetlayers{edgelayer,nodelayer,main}
+%%%<
+\usepackage{verbatim}
+%%%>
+
+\usepackage{xspace}
+\sloppy
+% The following is enclosed to allow easy detection of differences in
+% ascii coding.
+% Upper-case    A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+% Lower-case    a b c d e f g h i j k l m n o p q r s t u v w x y z
+% Digits        0 1 2 3 4 5 6 7 8 9
+% Exclamation   !           Double quote "          Hash (number) #
+% Dollar        $           Percent      %          Ampersand     &
+% Acute accent  '           Left paren   (          Right paren   )
+% Asterisk      *           Plus         +          Comma         ,
+% Minus         -           Point        .          Solidus       /
+% Colon         :           Semicolon    ;          Less than     <
+% Equals        =3D           Greater than >          Question mark ?
+% At            @           Left bracket [          Backslash     \
+% Right bracket ]           Circumflex   ^          Underscore    _
+% Grave accent  `           Left brace   {          Vertical bar  |
+% Right brace   }           Tilde        ~
+
+% A couple of exemplary definitions:
+
+\def\lastname{Please list Your Lastname Here}
+\begin{document}
+\input{symbols}
+
+\begin{frontmatter}
+    \title{A Clausal Tableaux for Modal Logics} 
+    \author{Daniella Angelos\thanksref{ALL}\thanksref{myemail}}
+    \address{Department of Computer Science\\ University of Bras\'ilia\\
+    CEP: 70.910-090, Bras\'ilia, DF, Brazil} 
+    \author{Cl\'audia Nalon\thanksref{coemail}}
+    \address{Department of Computer Science\\ University of Bras\'ilia\\
+    CEP: 70.910-090, Bras\'ilia, DF, Brazil} 
+    \thanks[ALL]{Thanks to everyone who should be thanked} 
+    \thanks[myemail]{Email: \href{mailto:angelos@aluno.unb.br} {\texttt{\normalshape angelos@aluno.unb.br}}} 
+    \thanks[coemail]{Email: \href{mailto:nalon@unb.br} {\texttt{\normalshape nalon@unb.br}}}
+\begin{abstract} 
+\end{abstract}
+\begin{keyword}
+\end{keyword}
+\end{frontmatter}
+\section{Introduction}
+\label{intro}
+
+\input{tex/language}
+\input{tex/tableauxclausal}
+\input{tex/calculus}
+\input{tex/correctnessresults}
+\input{tex/example}
+\input{tex/relatedwork}
+
+\bibliographystyle{plain}
+\bibliography{bib/logic,bib/proof}
+
+\end{document}

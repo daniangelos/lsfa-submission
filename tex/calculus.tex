@@ -1,0 +1,153 @@
+\section{Calculus}
+\label{sec:calculus}
+
+The proposed calculus, denoted by \ckn, comprehends a set of inference rules to
+deal with both propositional and modal reasoning. Before presenting these rules,
+it is necessary to define the notation that is used in them, in order to
+establish the formality needed.
+
+\begin{definition}
+\label{def_conjuntos}
+Let $\gamma^i, \lambda^i$ e $\theta^i$ be representations of 
+literal, $\agent$-negative and $\agent$-positive clauses, respectively,
+as follows:
+\begin{enumerate}
+\item $\gamma^i := i : \bigvee^t_{k=1} l_k$
+    \vspace{0.4em}
+\item $\lambda^i := i : l \then \pos{a}m$
+    \vspace{0.4em}
+\item $\theta^i := i : l \then \nec{a}m$
+\end{enumerate}
+
+Also, let $\Gamma^i, \Lambda^i$ e $\Theta^i$ be the initial set of the  
+respective clauses at the modal level \ml:
+\begin{enumerate}
+   \item $\Gamma^i := \{\gamma_1^i, \ldots, \gamma_p^i\}$, $p \in \mathbb{N}$
+    \vspace{0.4em}
+   \item $\Lambda^i := \{\lambda_1^i, \ldots, \lambda_q^i\}$, $q \in \mathbb{N}$
+    \vspace{0.4em}
+   \item $\Theta^i := \{\theta_1^i, \ldots, \theta_r^i\}$, $r \in \mathbb{N}$
+\end{enumerate}
+
+Let $\iota$ be the maximum modal level of a clause in any of the sets defined
+above and consider then that the initial set of clauses is represented by:
+\begin{enumerate}
+    \item $C = (\bigcup_{i=1}^{\iota} \Gamma^i) \cup (\bigcup_{i=1}^{\iota} \Lambda^i)
+        \cup (\bigcup_{i=1}^{\iota} \Theta^i)$ 
+\end{enumerate}
+
+Finally, consider $\Delta^i$ a set of literals, either propositional or modal,
+that belongs to the modal level $i$ with $\Pi^i = \{\Delta^i_1, \ldots,
+\Delta^i_k\}$, for some $k \in \mathbb{N}$. Observe that if $d \in \Delta^i_j$
+then $d \in \mathcal{L}$ or $d$ is of form $\pos{a} l$ or $\nec{a} l$
+(modal literal), for some $l \in \mathcal{L}$.
+\end{definition}
+
+Initiallly, consider that $\Pi^\ml$ carries an empty set $\Delta_1^\ml$, for all
+modal levels. We now present the inference rules that are aplied to theses sets
+of literals.
+
+The first inference rule, (PROP), related to literal clauses, has as numerator
+all literal sets that are already satisfied at modal level \ml, and considers a
+clause $\gamma^\ml = \cprop{t}{k}$ of $\Gamma^\ml$ that has not been treated. The
+application of (PROP) for the clause $\gamma^\ml$ results in the branching of
+each set of the numerator to consider every literal in the disjunction.  The
+intuition for this rule is that if $\Delta^i_j$ and $\gamma^\ml \in \Gamma^\ml$
+are both satisfiable, then $\Delta^i_j \cup \{l_r\}$ has to be satisfiable for
+some $1 \leq r \leq t$, therefore, at least one of the denominators is
+satisfiable.
+
+The rules (NEG) and (POS) refer to modal clauses. Their meaning are pretty
+similar, even though they deal with different types of modal clauses, the
+difference is only the semantics of the operators. Ergo, the following
+description refers to the rule (NEG), being the one for the rule (POS)
+analogous.
+
+This rule has as numerator all literal sets $\Delta^i_j$ that are already
+satisfied at modal level \ml, and considers the $a$-negative modal clauses
+$\lambda^i = \cneg$ of $\Lambda^\ml$ at the same level. The application of (NEG)
+results in the duplication of $\Delta^i_j$ to consider both sides of the
+implication, as the implication is, actually, a disjuction between the head of the
+clause in negative form and the modal literal that occurs as the consequent
+of it ($\neg l \lor\pos{a} m$). By hypothesis, $\Delta^i_j$ and $\lambda^i$ are
+both satisfiable, so at least one of the denominators, $\Delta^i_j \cup \{\neg
+l\}$ or $\Delta^i_j \cup \{l,\pos{a}m\}$ must also be satisfiable.
+
+The last calculus' rule, (EXP), has as numerator all sets $\Delta^i_k \in
+\Pi^i$, at the \ml-th modal level, such that $\{\pos{a}m_0, \nec{a}m_1, \ldots,
+\nec{a}m_r\} \subseteq \Delta^i_k$ for some $m_0, m_1, \ldots, m_r \in
+\Literals, r \geq 0$. That means that this set contains at least one diamond and
+an arbitrary number of boxes.  This rule expresses that if $\Delta^i_k$ is
+satisfiable then exists at least one set $\Delta^{i+1}_j \in \Pi^{i+1}$ that
+satisfies $\{m_0, m_1, \ldots, m_r\}$, that is, each literal in a diamond must
+be satisfied at the next modal level along with all the literals in the boxes in
+the same set.
+
+\begin{figure*}
+\begin{framed}
+\begin{center}
+    \small{\
+    \begin{tabular}{c}
+        
+        \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Gamma^i \cup \{i : \bigvee^t_{k=1} l_k\} \\ \cline{1-1}
+                \Delta^i_j \cup \{l_1\}\ |\ \ldots\ |\ \Delta^i_j \cup \{l_t\}
+            \end{array}
+            &
+            \mbox{(PROP)}
+        \end{array}
+    %\caption{Regra de inferência do tableaux para cláusulas
+    %proposicionais}
+            }
+\vspace{1.5em}
+\\
+
+\begin{tabular}{cc}
+    \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Lambda^i \cup \{i : l \then \pos{a}m\}\\ \cline{1-1} 
+                \Delta^i_j \cup \{\neg l\}\ |\ \Delta^i_j \cup \{l, \pos{a}m\} 
+            \end{array}
+            &
+            \mbox{(NEG)}
+        \end{array}
+            }
+            &
+            \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Theta^i \cup \{i : l \then \nec{a}m\}\\ \cline{1-1}
+                \Delta^i_j \cup \{\neg l\}\ |\ \Delta^i_j \cup \{l, \nec{a}m\} 
+            \end{array}
+            &
+            \mbox{(POS)}
+        \end{array}
+            }
+        \end{tabular}
+\vspace{1.5em}
+        \\
+        \ensuremath{\begin{array}{cc}
+                \begin{array}{c}
+                    \Delta^i_k \cup \{\pos{a} m_0\} \cup \{\nec{a}m_1, \ldots, \nec{a}m_r\} \in \Pi^i \\ \cline{1-1} 
+                    \Delta^{i+1}_j \cup \{m_0, m_1, \ldots, m_r\}
+                \end{array}
+                &
+                \mbox{for some }\Delta^{i+1}_j \in\Pi^{i+1} \quad \mbox{(EXP)}
+                \end{array}
+            }
+    \end{tabular}
+}
+\end{center}
+\end{framed}
+\end{figure*}
+
+When branching a set of literals results in an inconsistency, i.e., when we
+generate a set that contains both $d$ and $\neg d$ for some $d$, this set is
+eliminated from the proof. Furthermore, if we are not able to satisfy a diamond
+of a specific set, along with all the boxes in the same set, we also eliminate
+this set of the proof. A proof that has all the sets at a specific modal level
+eliminated is called a closed tableau. A closed tableau means that the initial set
+of clauses $C$ was unsatisfiable while an open tableu gives us enough
+semantic information to construct a model that witnesses the satisfiability of
+these clauses.
+
