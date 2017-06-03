@@ -9,7 +9,7 @@ $\nec{a}$, that express the notion of necessity, for each index (or agent) $a$
 in a finite, fixed set $\mathcal{A} = \{1, \ldots, n\}, n \in \mathbb{N}$.
 
 The propositional symbols combined with the logic operators are arranged to form
-sentences (parentheses can be used to avoid ambiguity also). Therefore, the set
+sentences (parentheses can be used to avoid ambiguity). Therefore, the set
 of \wff~is recursively defined as showed in Definition~\ref{def:wff}.
 
 \begin{definition}
@@ -83,12 +83,12 @@ validity of a formula in \system{K}{n}{}.
     the model \Model,
     is inductively defined by:
     \begin{enumerate}
-        \item \sat{\Model}{\st}{p} if, and only if, $\pi(\st, p) = \textbf{true}$ 
-        \item \sat{\Model}{\st}{\neg\formula} if, and only if, $
+        \item \sat{\Model}{\st}{p} iff $\pi(\st, p) = \textbf{true}$ 
+        \item \sat{\Model}{\st}{\neg\formula} iff $
             \langle \Model, \st \rangle \not \models \formula$
-        \item \sat{\Model}{\st}{\formula\lor\psi} if, and only if,
+        \item \sat{\Model}{\st}{\formula\lor\psi} iff
             \sat{\Model}{\st}{\formula} or \sat{\Model}{\st}{\psi}
-        \item \sat{\Model}{\st}{\nec{a} \formula} if, and only if, $\forall~t\in
+        \item \sat{\Model}{\st}{\nec{a} \formula} iff $\forall~t\in
             W$, with $a \in \Agents$, $(\st, t) \in R_a$ implies
             \sat{\Model}{t}{\formula}
     \end{enumerate}
