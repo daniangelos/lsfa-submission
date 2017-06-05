@@ -7,5 +7,5 @@ pdf: paper.tex
 	pdflatex paper.tex
 
 clean: 
-	rm -f paper.aux  paper.blg  paper.log  paper.out
+	rm -f paper.aux  paper.blg  paper.log  paper.out paper.bbl
 

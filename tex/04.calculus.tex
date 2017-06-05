@@ -1,0 +1,84 @@
+The proposed calculus, denoted by \ckn, comprehends a set of inference rules to
+deal with both propositional and modal reasoning. Before presenting the inference rules, we need to define some more notation. Let $\set{C}$ be a set of clauses and $i \in \Nat$. We denote by $\gamma^i$ the set of literal clauses in $\set{C}$ occurring at the modal level $i$, that is, the set of clauses of the form $i: \bigvee^r_{b=1} l_b$; by $\lambda^i$ the set of negative $\agent$-clauses in $\set{C}$, that is, the clauses of the form $i : l \then \pos{\agent}m$, for all $\agent \in \Agents$; and by $\theta^i$ the set of positive $\agent$-clauses in $\set{C}$, that is, clauses of the form $i : l \then \nec{a}m$, for all $\agent \in \Agents$. We use capital Greek letters to denote sets of sets of clauses. Initially, $\Gamma^i = \{\gamma_i\}$, $\Lambda^i = \{\lambda^i\}$, and $\Theta^i = \{\theta^i\}$, for all modal levels $i$. We denote by $\Delta^i$ a set of literals and modal literals occurring at the modal level $i$. We set $\Delta^i =\emptyset$, initially. Finally, we denote by $\Pi^i$ all sets of literals occurring at a the modal level $i$.
+
+We now present the inference rules that are aplied to theses sets of literals. The inference rules try to build sets of literals for each modal level, starting with $\Pi^i = \{\emptyset\}$ (because $\Delta^i = \emptyset$ initially). 
+
+The first inference rule, (PROP), is applied to literal clauses. It takes as premisse the sets of literals already built and expands these sets with literals occurring in clauses in $\Gamma_i$, as shown in the conclusion of the rule. The
+intuition for this rule is that if $\Delta^i_j$ and $\gamma^\ml \in \Gamma^\ml$
+are both satisfiable, then $\Delta^i_j \cup \{l_r\}$ has to be satisfiable for
+some $1 \leq r \leq t$, therefore, at least one of the conclusions is
+satisfiable.
+
+The rules (NEG) and (POS) are applied to modal clauses. For (NEG), the premise is applied to every set of literals $\Delta^i_j$ already built and to a negative $\agent$-clause. As negative $a$-clauses can be seen as disjunctions, the conclusion is a branching, where the negation of the left-hand side is added to one of the sets and both the left-hand side and the right-hand side is added to the other set. The inference rule (POS) is similar.
+
+The last calculus' rule, (EXP), has as numerator all sets $\Delta^i_k \in
+\Pi^i$, at the \ml-th modal level, such that $\{\pos{a}m_0, \nec{a}m_1, \ldots,
+\nec{a}m_r\} \subseteq \Delta^i_k$ for some $m_0, m_1, \ldots, m_r \in
+\Literals, r \geq 0$. That means that this set contains at least one diamond and
+an arbitrary number of boxes.  This rule expresses that if $\Delta^i_k$ is
+satisfiable then exists at least one set $\Delta^{i+1}_j \in \Pi^{i+1}$ that
+satisfies $\{m_0, m_1, \ldots, m_r\}$, that is, each literal in a diamond must
+be satisfied at the next modal level along with all the literals in the boxes in
+the same set.
+
+\begin{figure*}
+\begin{framed}
+\begin{center}
+    \small{\
+    \begin{tabular}{c}
+        
+        \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Gamma^i \cup \{i : \bigvee^t_{k=1} l_k\} \\ \cline{1-1}
+                \Delta^i_j \cup \{l_1\}\ |\ \ldots\ |\ \Delta^i_j \cup \{l_t\}
+            \end{array}
+            &
+            \mbox{(PROP)}
+        \end{array}
+    %\caption{Regra de inferência do tableaux para cláusulas
+    %proposicionais}
+            }
+\vspace{1.5em}
+\\
+
+\begin{tabular}{cc}
+    \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Lambda^i \cup \{i : l \then \pos{a}m\}\\ \cline{1-1} 
+                \Delta^i_j \cup \{\neg l\}\ |\ \Delta^i_j \cup \{l, \pos{a}m\} 
+            \end{array}
+            &
+            \mbox{(NEG)}
+        \end{array}
+            }
+            &
+            \ensuremath{\begin{array}{cc}
+            \begin{array}{c}
+                \Delta^i_j \in \Pi^i \qquad \Theta^i \cup \{i : l \then \nec{a}m\}\\ \cline{1-1}
+                \Delta^i_j \cup \{\neg l\}\ |\ \Delta^i_j \cup \{l, \nec{a}m\} 
+            \end{array}
+            &
+            \mbox{(POS)}
+        \end{array}
+            }
+        \end{tabular}
+\end{tabular}
+}
+\end{center}
+\end{framed}
+\end{figure*}
+
+In addition to the inference rules for construction of sets, we also have two
+rules to eliminate sets that should not be part of the proof: 
+\begin{itemize}
+    \item[] (ELIM1): Eliminate sets containing both $l$ and $\neg l$ for some $l$.
+    \item[] (ELIM2): If, at some modal level, we have that every set satisfy
+        $\neg m_0 \lor \neg m_1 \lor \ldots \lor \neg m_r$, eliminate the
+        sets at the previous level that contains $\pos{a} m_0, \nec{a} m_1, \ldots, \nec{a}
+        m_r$.
+\end{itemize}
+
+A tableau proof, or just tableau, that has all the sets at the initial modal
+level eliminated is said do be \emph{closed}. A tableau is \emph{open} if it's
+not closed. A set of clauses that has an open tableau is said to be
+\ckn-satisfiable.

@@ -1,0 +1,34 @@
+\section{A Clausal Tableaux for \protect{\system{K}{n}{}}}
+\label{sec:tableauxclausal}
+
+Formally, a proof is a finite object constructed according to fixed set of syntactic rules that refer only to the structure of formulae, not to their intended
+meaning. The set of syntactic rules that are used to provide are said to specify a \emph{calculus}. A calculus is \emph{sound} for a particular logic if any
+formula that has a proof is a valid formula of this logic, and is
+\emph{complete} for a logic if every valid formula has a proof~\cite{fitting}.
+From these definitions, complete and sound calculi allow us to produce proofs that formulae are valid in a specific logic. As a formula is valid if, and only if, its negation is unsatisfiable, calculi which are constructed for satisfiability checking can also be used to determine whether a formula is valid or not.
+
+Tableaux-based methods are frequently used in modal
+logics because their structure is more obviously related to the notion of
+possible worlds \cite{fitting}. In general, proofs are graphically represented by trees where each branch can be thought as a set of formulae. Here we present a tableaux-based calculus for deciding the satisfiability of formulae in \system{K}{n}{}. Unlike many tableaux-based systems, our system is clausal and clauses are labelled by the modal level in which a formula occur. The normal form we use is called \emph{Separated Normal Form with Modal Levels} (\snf{K}) which separates the contexts considering the different modal ineceses and different modal levels appropriately. The transformation rules and the correction proof of the translation method can be find in~\cite{nalon2015modal}.
+
+A formula in this clausal form is represented by a set of clauses, which are
+true in their respectives modal levels. A formula in \snf{K} is of the form:
+$\bigwedge_i ml : C_i$,
+where each $C_i$ is a clause and $ml$ is the modal level in which the clause
+occurs. A clause in \snf{K} is in one of the following syntactic forms:
+\begin{itemize}
+    \item literal clause:
+        $
+        ml: \bigvee^r_{b=1} l_b
+        $
+    \item negative $a$-clause:
+        $
+        ml: l \then \pos{a}m
+        $
+    \item positive $a$-clause:
+        $
+        ml: l \then \nec{a}m
+        $
+\end{itemize}
+where $l_b, l, m \in \Literals, a \in \Agents$ and $r,b,ml \in \Nat$. As conjunctions are associative, commutative, and idempotent, we often refer to a formula into \snf{K} as a set of clauses.
+

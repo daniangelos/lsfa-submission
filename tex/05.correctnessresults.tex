@@ -4,8 +4,10 @@
 \subsection{Soundness}
 \label{sec:sound}
 
-As mentioned in the Section~\ref{sec:tableauxclausal}, to prove that \ckn~is
-sound, we just need to prove that its rules are sound.
+A calculus is sound when it does not prove anything that it shouldn't. A tableau
+calculus for a logic $L$ containing only sound rules, with respect to $L$, is
+sound~\cite{gore2009clausal}. A sound rule has a satisfiable conclusion every
+time its premisses are satisfiable.
 
 \begin{lemma}{(PROP)} Let $\gamma^i \in \cprop{k}{t}$ be a literal clause in
     \snf{ml} such that $\gamma^i \in \Gamma^i$, and $\Delta^i_j \in \Pi^i$ a
@@ -18,7 +20,7 @@ sound, we just need to prove that its rules are sound.
    with $\gamma^i = \cprop{k}{t} \in \Gamma^i$, and consider $\Delta^i_j \in
    \Pi^i$ a literal set that, by hypothesis, also belongs to the \ml-th modal
    level. Supose that these hypothesis are satisfiable in \system{K}{n}{}. By
-   Definition~\ref{satisfiability}, it is know that exists a model $\Model = (W,
+   the definition of satisfiability, there is a model $\Model = (W,
    \st_0, R_1, \ldots, R_n, \pi)$ and a world $\st \in W$ such that:
    \begin{itemize}
        \item $mdepth(\st) = \ml$ 
@@ -50,7 +52,7 @@ sound, we just need to prove that its rules are sound.
    modal level, with $\lambda^i = \cneg \in \Lambda^i$, and consider $\Delta^i_j
    \in \Pi^i$ a literal set that, by hypothesis, also belongs to the \ml-th
    modal level. Supose that these hypothesis are all satisfiable in
-   \system{K}{n}{}. By Definition~\ref{satisfiability}, it is know that exists a
+   \system{K}{n}{}. By the definition of satisfiability, there exists a
    model $\Model = (W, \st_0, R_1, \ldots, R_n, \pi)$ and a world $\st \in W$
    such that:
    \begin{itemize}
@@ -82,60 +84,18 @@ sound, we just need to prove that its rules are sound.
 Being the rule (POS) quite analog to the rule (NEG), we leave the proof of its
 soundness omitted.
 
-\begin{lemma}{(EXP)} Let $\Delta^i_k \in \Pi^i$ be a literal set at the \ml-th
-    modal level such that $\{\pos{a} m_0, \nec{a} m_1, \ldots, \nec{a} m_r\}
-    \subseteq \Delta^i_k$ for some $m_0, m_1, \ldots, m_r \in \Literals, r \geq 0$.
-    If $\Delta^i_k$ is satisfiable in \system{K}{n}{} then exists
-    $\Delta^{i+1}_j \in \Pi^{i+1}$ such that $\Delta^{i+1}_j \cup \{m_0, m_1,
-    \ldots, m_r\}$ is also satisfiable.
+\begin{lemma}{(ELIM1)}
+    
 \end{lemma}
 \begin{proof}
-    Let's assume that $\Delta^i_k \cup \{\pos{a}m_0\} \cup \{\nec{a}m_1, \ldots,
-    \nec{a}m_r\} \in \Pi^i$ is satisfiable in \system{K}{n}{}, i.e., that exists
-    a model $\Model = (W, \st_0, R_1, \ldots, R_n, \pi)$ and a world $\st \in
-    W$, with $mdepth(\st) = \ml$, such that, by Definition~\ref{satisfiability}:
-    \begin{itemize}
-        \item
-            \sat{\Model}{\st}{\Delta^i_k\cup\{\pos{a}m_0\}\cup\{\nec{a}m_1,\ldots,
-            \nec{a}m_r\}}
-    \end{itemize}
-    And by definition of satisfiability in sets:
-    \begin{itemize}
-        \item[(1)]
-            \sat{\Model}{\st}{d\land\pos{a}m_0\land\nec{a}
-            m_1\land\ldots\land\nec{a} m_r, \forall~d\in\Delta^i_k}
-    \end{itemize}
-    We have, then, \sat{\Model}{\st}{\pos{a}m_0}. Therefore, it exists a world
-    $\st'$, where $\st R_a \st'$ and $mdepth(\st')=\ml + 1$, where
-    \sat{\Model}{\st'}{m_0}. As \sat{\Model}{\st}{\nec{a}m_k} holds for every $0
-    \leq k \leq r$, and we already know that $\st R_a \st'$, then
-    \sat{\Model}{\st'}{m_k} also holds, for every $0 \leq k \leq r$, by the
-    definitions of satisfiability of the operators $\pos{a}$ and $\nec{a}$.
+    
+\end{proof}
 
-    Supose, by contradiction, that it doesn't exist $\Delta^{i+1}_j \in
-    \Pi^{i+1}$, literal set at $(\ml+1)$-th modal level, such that
-    $\Delta^{i+1}_j\cup\{m_0,m_1,\ldots,m_r\}$ is satisfiable in \Model. That
-    means that every set $\Delta^{i+1}_j$ satisfies $\neg m_0 \lor \neg m_1 \lor
-    \ldots \lor \neg m_r$. Then, again by definition of satisfiability of
-    $\nec{a}$, we have that $\sat{\Model}{\st''}{\nec{a}(\neg m_0\lor\neg
-    m_1\lor\ldots\lor\neg m_r)}$ for all $\st''$ with $mdepth(\st'')=i$. In
-    particular, because $mdepth(\st) = i$, we have that:
-    \begin{itemize}
-        \item[(2)] $\sat{\Model}{\st}{\nec{a}(\neg m_0 \lor \neg m_1 \lor \ldots
-            \lor \neg m_r)}$
-    \end{itemize}
-    From (1) and (2) and because $\nec{a}\formula\land\nec{a}\psi$ is
-    semantically equivalent to $\nec{a}(\formula\land\psi)$, we obtain that:
-    \begin{itemize}
-        \item[(3)] $\sat{\Model}{\st}{\nec{a}((\neg m_0 \lor \neg m_1 \lor
-                \ldots \lor \neg m_r)\land m_1 \land \ldots \land m_r) \land
-            \pos{a} m_0}$ 
-    \end{itemize}
-    By resolution's principle, we have $\sat{\Model}{\st}{\nec{a}\neg m_0 \land
-    \pos{a}m_0}$. Finally, by satisfiability definition of $\pos{a}$ and
-    $\nec{a}$, we obtain \sat{\Model}{\st}{\textbf{false}}, a contradiction.
-    Thus, the suposition of not existence of such $\Delta^{i+1}_j$ is untrue.
-    Therefore, the conclusion of the rule is satisfiable.
+\begin{lemma}{(ELIM2)}
+    
+\end{lemma}
+\begin{proof}
+    
 \end{proof}
 
 \subsection{Completeness}
@@ -143,9 +103,10 @@ soundness omitted.
 %It is complete if for all finite sets F of formulae,
 %if F is C L -satisfiable then F is L -satisfiable.
 
-We show that \ckn~is complete, by showing that for all set of clauses $C$ that
-has an open tableau, that is, for all set that is \ckn-satisfiable, $C$ must
-also be \system{K}{n}{}-satisfiable.
+A calculus is complete when it proves everything that it should. We show that
+\ckn~is complete, by showing that for all sets of clauses $C$ that have an open
+tableau, that is, for all sets that is \ckn-satisfiable, $C$ must also be
+\system{K}{n}{}-satisfiable.
 
 \begin{definition}
 \label{def:saturated} 
@@ -156,24 +117,26 @@ also be \system{K}{n}{}-satisfiable.
         \item All literal clauses, $a$-positive and $a$-negative clauses have
             been treated. That is, the (PROP), (NEG) and (POS) rules have been
             aplied to all clauses in $C$, appropriately.
-        \item In all modal levels $i$, if there is a set $\Delta^i$ that contains a
+        \item As a result of applying the rule (ELIM1), there is no set
+            containgin both $l$ and $\neg l$, for any $l$, at any modal level.
+        \item At all modal levels $i$, if there is a set $\Delta^i$ that contains a
             diamond, it must be a set at modal level $i+1$ that satisfies the
-            literal in the diamond and all the literals in boxes that are in
-            $\Delta^i$. That means that the rule (EXP) was aplied correctly in
-            all modal levels.
+            literal in the scope of the diamond and all the literals in the
+            scope of the boxes that are in $\Delta^i$. Otherwise, this set would
+            have been eliminated by the application of (ELIM2).
     \end{enumerate}
 \end{definition}
 
-If $\cal{T}$ is a saturated \ckn~tableau, we can extract several useful
-information about it. If, for instance, $\cprop{r}{k} \in C$, we know that
-exists a set of literals $\Delta^i$ at modal level \ml~such that $l_k \in
-\Delta^i$ for some $1 \leq k \leq r$, by item 1. Also by item 1, we know that if
-$\cneg \in C$, it has to exist a set $\Delta^i$ that satisfies either $\neg l$
-or $l \land \pos{a} m$. This last statement is analogous for an $a$-positive
-clause. Finaly, if, at any modal level \ml, we have a set $\Delta^i$ that
-contains $\pos{a} m_0$ and $\nec{a} m_1, \ldots, \nec{a} m_r$, with $r \geq 0$,
-we will also have a set at modal level $i+1$ that contains $m_0, m_1, \ldots,
-m_r$, by item 2. 
+If $\cal{T}$ is a saturated \ckn~open tableau, we can extract several useful
+information. If, for instance, $\cprop{r}{k}
+\in C$, we know that exists a set of literals $\Delta^i$ at modal level \ml~such
+that $l_k \in \Delta^i$ for some $1 \leq k \leq r$, by item one. Also by item one,
+we know that if $\cneg \in C$, it has to exist a set $\Delta^i$ that satisfies
+either $\neg l$ or $l \land \pos{a} m$. This last statement is analogous for an
+$a$-positive clause. Finaly, if, at any modal level \ml, we have a set
+$\Delta^i$ that contains $\pos{a} m_0$ and $\nec{a} m_1, \ldots, \nec{a} m_r$,
+with $r \geq 0$, we will also have a set at modal level $i+1$ that satisfies
+$m_0, m_1, \ldots, m_r$, by item three. 
 
 We now specify a systematic construction procedure that, when followed,
 generates either a closed or a saturated tableau for any set of clauses
@@ -181,18 +144,18 @@ $C$.
 
 \begin{enumerate}
     \item Initially, apply the rule (PROP) to all literal clauses at all modal
-        levels. This will be know as the propositional phase. If all sets of
-        literals at some modal level are eliminated then return the closed
-        tableau.
+        levels, eliminating the sets where inconsistency is inserted. If all the
+        sets of the initial modal level are eliminated, return a closed tableau.
     \item Next, apply the rules (NEG) and (POS) to all modal clauses at all modal
-        levels. This will be know as the modal phase. Again, if some modal level
-        is empty, return the closed tableau.
+        levels, always eliminating the inconsistent sets. Again, if the first
+        modal level is empty, return the closed tableau.
     \item Finally, from the maximum modal level downto the first one do as
         follows: For each diamond not yet satisfied, search in the next modal
-        level for a set to apply the rule (EXP). If the search fails then
-        eliminate the set holding this diamond. This phase is called the
-        expansion phase. If all sets at some modal level are eliminated, return
-        the closed tableau. Otherwise, return the saturated tableau generated.
+        level for a set to satisfy the literals in the scope of this diamond and
+        in the scope of every box belonging to the same set. The search fails
+        when the rule (ELIM2) can be applied to the set holding this diamond.
+        If all sets at the first modal level are eliminated, return the closed
+        tableau. Otherwise, return the saturated tableau generated.
 \end{enumerate}
 
 There is some flexibility entailed on the procedure described in the sense that
@@ -213,6 +176,6 @@ terminate.
     is \system{K}{n}{}-satisfiable.
 \end{theorem}
 \begin{proof}
-    Let $C$ be a \ckn-satisfiable set of clauses. Following the the procedure
-    described above, we are able to generate a saturated tableau for $C$. 
+    %Let $C$ be a \ckn-satisfiable set of clauses. Following the the procedure
+    %described above, we are able to generate a saturated tableau for $C$. 
 \end{proof}

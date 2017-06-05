@@ -1,0 +1,74 @@
+\section{Language}
+\label{sec:language}
+
+The language of \system{K}{n}{} is equivalent to its set of \emph{well-formed
+formulae}, denoted \wff, which is constructed from a denumerable set of
+\emph{propositional symbols} $\Prop = \{p, q, r, \ldots\}$, the negation
+symbol $\neg$, the disjunction symbol $\lor$ and the modal connectives
+$\nec{a}$, that express the notion of necessity, for each index $a$
+in a finite, fixed set $\mathcal{A} = \{1, \ldots, n\}, n \in \mathbb{N}$.
+
+%The propositional symbols combined with the logic operators are arranged to form sentences (parentheses can be used to avoid ambiguity also). Therefore, the set of \wff~is recursively defined as showed in Definition~\ref{def:wff}.
+
+\begin{definition}
+\label{def:wff}
+    The set of well-formed formulae, \wff, is the least set such that:
+    \begin{enumerate}
+        \item $p \in \wff$, for all $p \in \Prop$
+            \vspace{.2ex}
+        \item if $\varphi, \psi \in \wff$, then so are $\neg \varphi, (\varphi
+            \lor \psi)$ and $\nec{a} \varphi$, for each $a \in \Agents$
+    \end{enumerate}
+\end{definition}
+
+When $n = 1$, we often omit the index in the modal operators, i.e., we just write $\nec{} \varphi$ and $\pos{}\varphi$, for a formula $\varphi$. Other logic operators may be introduced as abbreviations, as usual:
+$\varphi \wedge \psi \stackrel{def} \neg(\neg \varphi \lor \neg \psi)$
+(conjuction),
+$\varphi \then \psi \stackrel{def} \neg \varphi \lor \psi$ (implication),
+$\varphi \iff \psi \stackrel{def} (\varphi \then \psi) \land (\psi \then
+\varphi)$ (equivalence),
+$\pos{a} \varphi \stackrel{def} \neg \nec{a} \neg \varphi$ (possibility),
+$\textbf{false} \stackrel{def} \varphi \wedge \neg \varphi$ (\emph{falsum}),
+$ \textbf{true} \stackrel{def} \neg \textbf{false}$ (\emph{verum}). Parentheses may be ommitted if the reading is not ambiguous.
+
+A \emph{literal} is a propositional symbol $p \in \Prop$ or its negation $\neg p$. We denote by \Literals~the set of all literals. A \emph{modal literal} is a formula of the form $\nec{a} l$ o $\pos{a} \neg l$, with $l \in \Literals$ and $a \in \Agents$.
+
+%In the following, we often refer to formulae of the form $\nec{a} \varphi$ as \emph{box} \varphi~and to formulae of the form $\pos{a} \varphi$ as \emph{diamond} \varphi.
+
+%Logics that involve $n$ agents in the modal logic, with $n \in \Nat$, are know
+%as Multimodal Logics. 
+
+The maximal number of nesting modal operators in a formula is defined as its \emph{modal depth} and denoted $mdepth$. The maximal number of modal operators in which scope the formula occurs is defined as the \emph{modal level} of that formula, and it is denoted $ml$. For instance, in $\nec{a}\pos{a} p$, $mdepth(p) = 0$ and $ml(p) = 2$.
+
+The semantics of \system{K}{n}{} is presented in terms of Kripke structures.
+
+\begin{definition}
+    A Kripke model for \Prop~and \Agents~is given by the tuple $\Model = (\st, \st_0, R_1, \ldots, R_n, \pi)$,
+    where $\st$ is a non-empty set of possible worlds with a distinguinshed world
+    $\st_0$, the root of \Model; each $R_a$, $a \in \Agents$, is a binary relation
+    on $\st$, and $\pi: \st \times \Prop \longrightarrow \{false, true\}$ is the
+    valuation function that associates to each world $\st \in \st$ a
+    truth-assignment to propositional symbols.
+\end{definition}
+
+Satisfiability and validity of a formula in a given world is defined as follows.
+
+\begin{definition}
+\label{relsat}
+    Let $\Model = (\st, \st_0, R_1, \ldots, R_n, \pi)$ be a Kripke model, $\st \in \st$ a world, and $\varphi, \psi \in \wff$. The \emph{satisfiability relation}, denoted by 
+    \sat{\Model}{\st}{\varphi}, between a world \st~and a formula $\varphi$,
+    is inductively defined by:
+    \begin{enumerate}
+        \item \sat{\Model}{\st}{p} if, and only if, $\pi(\st, p) = \textbf{true}$, for all $p \in \Prop$;
+        \item \sat{\Model}{\st}{\neg\varphi} if, and only if, $
+            \langle \Model, \st \rangle \not \models \varphi$;
+        \item \sat{\Model}{\st}{\varphi\lor\psi} if, and only if,
+            \sat{\Model}{\st}{\varphi} or \sat{\Model}{\st}{\psi}
+        \item \sat{\Model}{\st}{\nec{a} \varphi} if, and only if, for all $t\in
+            \st$, $(\st, t) \in R_a$ implies  \sat{\Model}{t}{\varphi}
+    \end{enumerate}
+\end{definition}
+
+Satisfiability is defined in terms of the root of a model. A formula $\varphi \in \wff$ is said to be \emph{satisfiable} if there exists a Kripke model $\Model = (\st, \st_0, R_1, \ldots, R_n, \pi)$ such that \sat{\Model}{\st_0}{\varphi}. A formula is said to be \emph{valid} if it is satisfiable in all models.
+
+The local satisfiability problem in \system{K}{n}{} corresponds to determining the existence of a model at which a formula is satisfied. The local satisfiability problem for \system{K}{n}{} is PSPACE-complete \cite{Spaan:coml}.

@@ -1,36 +1,11 @@
-\documentclass{entcs} 
-%\usepackage{amsthm}
-%\usepackage{amssymb}
-%\usepackage{mathpartir}
-
+\documentclass{entcs}
 \usepackage{entcsmacro}
-%MY PACKAGES
-\usepackage[american]{babel}% Idiomas
+\usepackage{amsmath, amssymb}
 \usepackage{framed}
-\usepackage{indentfirst}
-\usepackage{listings}
-%\usepackage{natbib}
-\usepackage{mathtools}
-\usepackage{mhchem}
-\usepackage{pgf}
-\usepackage{tikz}
-\usetikzlibrary{trees,er,matrix,mindmap,backgrounds}
-\usetikzlibrary{shadings,intersections,calc}
-\usetikzlibrary{shapes,arrows,patterns,snakes}
-\usetikzlibrary{automata,shadows,fit,fadings,matrix,positioning}
-\usepackage{pgfplots}
-\usepackage{pgfkeys}
-\usepackage{mathrsfs}
-\usepackage{multirow}
-\usepgfplotslibrary{units}
-\pgfdeclarelayer{nodelayer}
-\pgfdeclarelayer{edgelayer}
-\pgfsetlayers{edgelayer,nodelayer,main}
-%%%<
-\usepackage{verbatim}
-%%%>
 
-\usepackage{xspace}
+
+%MY PACKAGES
+\usepackage[british]{babel}% Idiomas
 \sloppy
 % The following is enclosed to allow easy detection of differences in
 % ascii coding.
@@ -51,19 +26,19 @@
 
 % A couple of exemplary definitions:
 
-\def\lastname{Please list Your Lastname Here}
+\def\lastname{Angelos \& Nalon}
 \begin{document}
 \input{symbols}
 
 \begin{frontmatter}
     \title{A Clausal Tableaux for Modal Logics} 
-    \author{Daniella Angelos\thanksref{ALL}\thanksref{myemail}}
+    \author{Daniella Angelos\thanksref{myemail}}
     \address{Department of Computer Science\\ University of Bras\'ilia\\
     CEP: 70.910-090, Bras\'ilia, DF, Brazil} 
     \author{Cl\'audia Nalon\thanksref{coemail}}
     \address{Department of Computer Science\\ University of Bras\'ilia\\
     CEP: 70.910-090, Bras\'ilia, DF, Brazil} 
-    \thanks[ALL]{Thanks to everyone who should be thanked} 
+%    \thanks[ALL]{Thanks to everyone who should be thanked} 
     \thanks[myemail]{Email: \href{mailto:angelos@aluno.unb.br} {\texttt{\normalshape angelos@aluno.unb.br}}} 
     \thanks[coemail]{Email: \href{mailto:nalon@unb.br} {\texttt{\normalshape nalon@unb.br}}}
 \begin{abstract} 
@@ -74,14 +49,14 @@
 \section{Introduction}
 \label{intro}
 
-\input{tex/language}
-\input{tex/tableauxclausal}
-\input{tex/calculus}
-\input{tex/correctnessresults}
-\input{tex/example}
-\input{tex/relatedwork}
+\input{tex/02.language.tex}
+\input{tex/03.tableauxclausal.tex}
+\input{tex/04.calculus.tex}
+\input{tex/05.correctnessresults.tex}
+\input{tex/06.example.tex}
+\input{tex/07.relatedwork.tex}
 
 \bibliographystyle{plain}
-\bibliography{bib/logic,bib/proof}
+\bibliography{bib/lsfa2017,bib/logic,bib/proof}
 
 \end{document}
