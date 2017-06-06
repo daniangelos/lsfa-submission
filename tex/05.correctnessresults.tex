@@ -9,7 +9,7 @@ calculus for a logic $L$ containing only sound rules, with respect to $L$, is
 sound~\cite{gore2009clausal}. A sound rule has a satisfiable conclusion every
 time its premisses are satisfiable.
 
-\begin{lemma}{(PROP)} Let $\gamma^i \in \cprop{k}{t}$ be a literal clause in
+\begin{lemma}{(PROP)} Let $\gamma^i = \cprop{k}{t}$ be a literal clause in
     \snf{ml} such that $\gamma^i \in \Gamma^i$, and $\Delta^i_j \in \Pi^i$ a
     literal set at the \ml-th modal level. If $\gamma^i$ and $\Delta^i_j$ are
     both satisfiable in \system{K}{n}{} then exists $1 \leq r \leq t$ such that
@@ -27,7 +27,7 @@ time its premisses are satisfiable.
        \item \sat{\Model}{\st}{\bigvee_{k=1}^t l_k} and
        \item \sat{\Model}{\st}{d}, $\forall~d \in \Delta^i_j$
    \end{itemize}
-   To prove that this rule is sound, it is sufficient to show that, in an
+   To prove that this rule is sound, it is sufficient to proof that, in an
    instancy of it, at least one of its denominators is satisfiable. In fact, we
    have that:
    \begin{itemize}
@@ -42,8 +42,8 @@ time its premisses are satisfiable.
 
 \begin{lemma}{(NEG)} Let $\lambda^i = \cneg$ be an $a$-negative clause in \snf{ml}
     such that $\lambda^i \in \Lambda^i$, and $\Delta^i_j \in \Pi^i$ a literal
-    set in the \ml-th modal level. If $\lambda^i$ and $\Delta^i_j$ are both
-    satisfiable in \system{K}{n}{} then at least one of $\Delta^i_j \cup
+    set at the \ml-th modal level. If $\lambda^i$ and $\Delta^i_j$ are both
+    satisfiable in \system{K}{n}{} then either $\Delta^i_j \cup
     \{\neg l\}$ or $\Delta^i_j \cup \{l, \pos{a}m\}$ is also satisfiable in
     \system{K}{n}{}.
 \end{lemma}
@@ -60,7 +60,7 @@ time its premisses are satisfiable.
        \item \sat{\Model}{\st}{l \then\pos{a} m}
        \item \sat{\Model}{\st}{d}, $\forall~d \in \Delta^i_j$
    \end{itemize}
-   To prove that this rule is sound, it is sufficient to show that, in an
+   To prove that this rule is sound, it is sufficient to proof that, in an
    instancy of it, one of the denominators is satisfiable. In fact, we have
    that:
    \begin{itemize}
@@ -84,18 +84,71 @@ time its premisses are satisfiable.
 Being the rule (POS) quite analog to the rule (NEG), we leave the proof of its
 soundness omitted.
 
-\begin{lemma}{(ELIM1)}
-    
+The proofs for elimination rules use the contrapositive.
+
+\begin{lemma}{(ELIM1)} Let $\Delta^i_j \in \Pi^i$ be a literal set at the \ml-th
+    modal level. If $\Delta^i_j$ is satisfiable in \system{K}{n}{} then
+    $\Delta^i_j$ does not contain both $l$ and $\neg l$ for any $l \in
+    \Delta^i_j$.
 \end{lemma}
 \begin{proof}
-    
+    Trivial by the definition of satisfiability.
 \end{proof}
 
-\begin{lemma}{(ELIM2)}
-    
+\begin{lemma}{(ELIM2)} Let $\Delta^i_k \in \Pi^i$ be a literal set at the \ml-th
+    modal level such that $\{\pos{a} m_0, \nec{a} m_1, \ldots, \nec{a} m_r\}
+    \subseteq \Delta^i_k$ for some $m_0, m_1, \ldots, m_r \in \Literals, r \geq 0$.
+    If $\Delta^i_k$ is satisfiable in \system{K}{n}{} then exists
+    $\Delta^{i+1}_j \in \Pi^{i+1}$ such that $\Delta^{i+1}_j \cup \{m_0, m_1,
+    \ldots, m_r\}$ is also satisfiable.
 \end{lemma}
 \begin{proof}
-    
+    Let's assume that $\Delta^i_k \cup \{\pos{a}m_0\} \cup \{\nec{a}m_1, \ldots,
+    \nec{a}m_r\} \in \Pi^i$ is satisfiable in \system{K}{n}{}, i.e., that exists
+    a model $\Model = (W, \st_0, R_1, \ldots, R_n, \pi)$ and a world $\st \in
+    W$, with $mdepth(\st) = \ml$, such that, by Definition~\ref{relsat}:
+    \begin{itemize}
+        \item
+            \sat{\Model}{\st}{\Delta^i_k\cup\{\pos{a}m_0\}\cup\{\nec{a}m_1,\ldots,
+            \nec{a}m_r\}}
+    \end{itemize}
+    And by definition of satisfiability in sets:
+    \begin{itemize}
+        \item[(1)]
+            \sat{\Model}{\st}{d\land\pos{a}m_0\land\nec{a}
+            m_1\land\ldots\land\nec{a} m_r, \forall~d\in\Delta^i_k}
+    \end{itemize}
+    We have, then, \sat{\Model}{\st}{\pos{a}m_0}. Therefore, it exists a world
+    $\st'$, where $\st R_a \st'$ and $mdepth(\st')=\ml + 1$, where
+    \sat{\Model}{\st'}{m_0}. As \sat{\Model}{\st}{\nec{a}m_k} holds for every $0
+    \leq k \leq r$, and we already know that $\st R_a \st'$, then
+    \sat{\Model}{\st'}{m_k} also holds, for every $0 \leq k \leq r$, by the
+    definitions of satisfiability of the operators $\pos{a}$ and $\nec{a}$.
+
+    Supose, by contradiction, that it doesn't exist $\Delta^{i+1}_j \in
+    \Pi^{i+1}$, literal set at $(\ml+1)$-th modal level, such that
+    $\Delta^{i+1}_j\cup\{m_0,m_1,\ldots,m_r\}$ is satisfiable in \Model. That
+    means that every set $\Delta^{i+1}_j$ satisfies $\neg m_0 \lor \neg m_1 \lor
+    \ldots \lor \neg m_r$. Then, again by definition of satisfiability of
+    $\nec{a}$, we have that $\sat{\Model}{\st''}{\nec{a}(\neg m_0\lor\neg
+    m_1\lor\ldots\lor\neg m_r)}$ for all $\st''$ with $mdepth(\st'')=i$. In
+    particular, because $mdepth(\st) = i$, we have that:
+    \begin{itemize}
+        \item[(2)] $\sat{\Model}{\st}{\nec{a}(\neg m_0 \lor \neg m_1 \lor \ldots
+            \lor \neg m_r)}$
+    \end{itemize}
+    From (1) and (2) and because $\nec{a}\formula\land\nec{a}\psi$ is
+    semantically equivalent to $\nec{a}(\formula\land\psi)$, we obtain that:
+    \begin{itemize}
+        \item[(3)] $\sat{\Model}{\st}{\nec{a}((\neg m_0 \lor \neg m_1 \lor
+                \ldots \lor \neg m_r)\land m_1 \land \ldots \land m_r) \land
+            \pos{a} m_0}$ 
+    \end{itemize}
+    By resolution's principle, we have $\sat{\Model}{\st}{\nec{a}\neg m_0 \land
+    \pos{a}m_0}$. Finally, by satisfiability definition of $\pos{a}$ and
+    $\nec{a}$, we obtain \sat{\Model}{\st}{\textbf{false}}, a contradiction.
+    Thus, the suposition of not existence of such $\Delta^{i+1}_j$ is untrue.
+    Therefore, the conclusion of the rule is satisfiable.
 \end{proof}
 
 \subsection{Completeness}
@@ -127,16 +180,16 @@ tableau, that is, for all sets that is \ckn-satisfiable, $C$ must also be
     \end{enumerate}
 \end{definition}
 
-If $\cal{T}$ is a saturated \ckn~open tableau, we can extract several useful
-information. If, for instance, $\cprop{r}{k}
-\in C$, we know that exists a set of literals $\Delta^i$ at modal level \ml~such
-that $l_k \in \Delta^i$ for some $1 \leq k \leq r$, by item one. Also by item one,
-we know that if $\cneg \in C$, it has to exist a set $\Delta^i$ that satisfies
-either $\neg l$ or $l \land \pos{a} m$. This last statement is analogous for an
-$a$-positive clause. Finaly, if, at any modal level \ml, we have a set
-$\Delta^i$ that contains $\pos{a} m_0$ and $\nec{a} m_1, \ldots, \nec{a} m_r$,
-with $r \geq 0$, we will also have a set at modal level $i+1$ that satisfies
-$m_0, m_1, \ldots, m_r$, by item three. 
+If $\cal{T}$ is a saturated \ckn~open tableau for $C$, we can extract a model
+that satisfies $C$. This is showed in Theorem~\ref{completeness}.
+%If, for instance, $\cprop{r}{k} \in C$, we know that exists a set of literals
+%$\Delta^i$ at modal level \ml~such that $l_k \in \Delta^i$ for some $1 \leq k
+%\leq r$, by item one. Also by item one, we know that if $\cneg \in C$, it has to
+%exist a set $\Delta^i$ that satisfies either $\neg l$ or $l \land \pos{a} m$.
+%This last statement is analogous for an $a$-positive clause. Finaly, if, at any
+%modal level \ml, we have a set $\Delta^i$ that contains $\pos{a} m_0$ and
+%$\nec{a} m_1, \ldots, \nec{a} m_r$, with $r \geq 0$, we will also have a set at
+%modal level $i+1$ that satisfies $m_0, m_1, \ldots, m_r$, by item three. 
 
 We now specify a systematic construction procedure that, when followed,
 generates either a closed or a saturated tableau for any set of clauses
@@ -145,7 +198,7 @@ $C$.
 \begin{enumerate}
     \item Initially, apply the rule (PROP) to all literal clauses at all modal
         levels, eliminating the sets where inconsistency is inserted. If all the
-        sets of the initial modal level are eliminated, return a closed tableau.
+        sets of the first modal level are eliminated, return the closed tableau.
     \item Next, apply the rules (NEG) and (POS) to all modal clauses at all modal
         levels, always eliminating the inconsistent sets. Again, if the first
         modal level is empty, return the closed tableau.
@@ -172,10 +225,26 @@ terminate.
 \end{proof}
 
 \begin{theorem}
+\label{completeness}
     Let $C$ be a set of clauses in \snf{K}. If $C$ is \ckn-satisfiable then it
     is \system{K}{n}{}-satisfiable.
 \end{theorem}
 \begin{proof}
-    %Let $C$ be a \ckn-satisfiable set of clauses. Following the the procedure
-    %described above, we are able to generate a saturated tableau for $C$. 
+    Let $C$ be a \ckn-satisfiable set of clauses, thus, following the procedure
+    described above, we are able to generate a saturated open tableau
+    $\mathcal{T}$ for $C$. To proof that $C$ is also satisfiable in
+    \system{K}{n}{}, we need to build a model $\Model = (\St, \st_0, R_1, \ldots, R_n, \pi)$ that satisfies $C$. We do this
+    using the information in $\mathcal{T}$.
+
+    If $\iota$ is the largest modal level in $\mathcal{T}$, take $W = \Pi^1 \cup
+    \ldots \cup \Pi^\iota$ and $\pi(\Delta^i_j, p) = $ \textbf{true} if $p \in
+    \Delta^i_j$ and $\pi(\Delta^i_j, p) =$ \textbf{false}, otherwise.
+
+    From the systematic procedure, if $\Delta^{i+1}_k$ is the return of the
+    search for a set that satisfies the diamond $\pos{a}$ in $\Delta^i_j$, take
+    $R_{\agent} \cup \{(\Delta^i_j, \Delta^{i+1}_k)\}$.
+
+    Finally, any set $\Delta^1_j \in \Pi^1$ can be taken as $\st_0$.
+
+    Now, to proof that \Model~satisfies $C$,
 \end{proof}

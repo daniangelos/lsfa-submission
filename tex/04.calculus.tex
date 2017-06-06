@@ -1,5 +1,17 @@
 The proposed calculus, denoted by \ckn, comprehends a set of inference rules to
-deal with both propositional and modal reasoning. Before presenting the inference rules, we need to define some more notation. Let $\set{C}$ be a set of clauses and $i \in \Nat$. We denote by $\gamma^i$ the set of literal clauses in $\set{C}$ occurring at the modal level $i$, that is, the set of clauses of the form $i: \bigvee^r_{b=1} l_b$; by $\lambda^i$ the set of negative $\agent$-clauses in $\set{C}$, that is, the clauses of the form $i : l \then \pos{\agent}m$, for all $\agent \in \Agents$; and by $\theta^i$ the set of positive $\agent$-clauses in $\set{C}$, that is, clauses of the form $i : l \then \nec{a}m$, for all $\agent \in \Agents$. We use capital Greek letters to denote sets of sets of clauses. Initially, $\Gamma^i = \{\gamma_i\}$, $\Lambda^i = \{\lambda^i\}$, and $\Theta^i = \{\theta^i\}$, for all modal levels $i$. We denote by $\Delta^i$ a set of literals and modal literals occurring at the modal level $i$. We set $\Delta^i =\emptyset$, initially. Finally, we denote by $\Pi^i$ all sets of literals occurring at a the modal level $i$.
+deal with both propositional and modal reasoning. Before presenting the
+inference rules, we need to define some more notation. Let $\set{C}$ be a set of
+clauses and $i \in \Nat$. Consider that $\gamma^i$ names a literal clause in
+$\set{C}$ occurring at the modal level $i$, that is, a clause of the form $i:
+\bigvee^r_{b=1} l_b$; $\lambda^i$ names a negative $\agent$-clause in $\set{C}$,
+that is, a clause of the form $i : l \then \pos{\agent}m$, for all $\agent \in
+\Agents$; and $\theta^i$ a positive $\agent$-clause in $\set{C}$, that is, a
+clause of the form $i : l \then \nec{a}m$, for all $\agent \in \Agents$. We use
+the capital Greek letters $\Gamma^i, \Lambda^i$ and $\Theta^i$ to denote the
+respective sets of clauses. We denote by $\Delta^i$ a set of literals and modal
+literals occurring at the modal level $i$. Initially, $\Delta^i =\emptyset$.
+Finally, we denote by $\Pi^i$ all sets of literals occurring at the modal
+level $i$.
 
 We now present the inference rules that are aplied to theses sets of literals. The inference rules try to build sets of literals for each modal level, starting with $\Pi^i = \{\emptyset\}$ (because $\Delta^i = \emptyset$ initially). 
 
@@ -9,17 +21,12 @@ are both satisfiable, then $\Delta^i_j \cup \{l_r\}$ has to be satisfiable for
 some $1 \leq r \leq t$, therefore, at least one of the conclusions is
 satisfiable.
 
-The rules (NEG) and (POS) are applied to modal clauses. For (NEG), the premise is applied to every set of literals $\Delta^i_j$ already built and to a negative $\agent$-clause. As negative $a$-clauses can be seen as disjunctions, the conclusion is a branching, where the negation of the left-hand side is added to one of the sets and both the left-hand side and the right-hand side is added to the other set. The inference rule (POS) is similar.
-
-The last calculus' rule, (EXP), has as numerator all sets $\Delta^i_k \in
-\Pi^i$, at the \ml-th modal level, such that $\{\pos{a}m_0, \nec{a}m_1, \ldots,
-\nec{a}m_r\} \subseteq \Delta^i_k$ for some $m_0, m_1, \ldots, m_r \in
-\Literals, r \geq 0$. That means that this set contains at least one diamond and
-an arbitrary number of boxes.  This rule expresses that if $\Delta^i_k$ is
-satisfiable then exists at least one set $\Delta^{i+1}_j \in \Pi^{i+1}$ that
-satisfies $\{m_0, m_1, \ldots, m_r\}$, that is, each literal in a diamond must
-be satisfied at the next modal level along with all the literals in the boxes in
-the same set.
+The rules (NEG) and (POS) are applied to modal clauses. For (NEG), the premise
+is applied to every set of literals $\Delta^i_j$ already built and to a negative
+$\agent$-clause. As negative $a$-clauses can be seen as disjunctions, the
+conclusion is a branching, where the negation of the left-hand side is added to
+one of the sets and both the left-hand side and the right-hand side is added to
+the other set. The inference rule (POS) is similar.
 
 \begin{figure*}
 \begin{framed}
@@ -78,7 +85,7 @@ rules to eliminate sets that should not be part of the proof:
         m_r$.
 \end{itemize}
 
-A tableau proof, or just tableau, that has all the sets at the initial modal
+A tableau proof, or just tableau, that has all the sets at the first modal
 level eliminated is said do be \emph{closed}. A tableau is \emph{open} if it's
 not closed. A set of clauses that has an open tableau is said to be
 \ckn-satisfiable.
